@@ -1,0 +1,31 @@
+.notifications.hidden {
+	display: none;
+}
+
+.notifications.visible {
+	display: block;
+}
+
+.notifications {
+	position: absolute;
+	clear: both;
+	bottom: 0px;
+	right: 3px;
+	width: 235px;
+	background-color: white;
+	color: #000;
+	transition-duration: 0.5s, 0.5s;
+	transition-property: opacity;
+	font-family: verdana;
+
+	-moz-transition-duration: 0.5s, 0.5s;
+	-moz-transition-property: opacity;
+
+	-webkit-transition-duration: 0.5s, 0.5s;
+	-webkit-transition-property: opacity;
+
+	-ms-transition-duration: 0.5s, 0.5s;
+	-ms-transition-property: opacity;
+	z-index: 998;
+}
+

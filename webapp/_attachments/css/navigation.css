@@ -1,0 +1,373 @@
+#navigation {
+	height: 66px;
+	left: 200px;
+	right: 200px;
+	color: #455560;
+	position: absolute;
+	min-width: 580px;
+	background: url(../images/main-header-bg.png) repeat-x !important;
+}
+
+#navigation > div {
+	margin: auto;
+	display: block;
+	position: relative;
+}
+
+#navigation ul {
+	margin: auto;
+	position: relative;
+}
+
+.market-navigation {
+	width: 840px;
+	left: 33px;
+}
+
+.portal-navigation {
+	width: 406px;
+}
+
+.account-navigation {
+	width: 406px;
+}
+
+.mainMenu.hover {
+	color: #37ADCA;
+}
+
+.mainMenu {
+	min-width: 150px;
+	cursor: pointer;
+}
+
+.contractUnselected #menu-market {
+	cursor: default;
+	color: #cccccc;
+}
+
+#logo {
+	width: 200px;
+	height: 66px;
+	position: relative;
+	float: left;
+	background: url(../images/caplin_logo.gif) no-repeat;
+}
+
+#right-navigation {
+
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	height: 30px;
+	width: 250px;
+	color: #455560;
+}
+
+#right-navigation ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+#right-navigation li {
+	display: block;
+	float: right;
+	border: 0;
+	padding: 2px 3px 2px 22px;
+}
+
+#right-navigation div {
+	height: 37px;
+
+}
+
+#right-navigation .menu-logout {
+	background: url(source/themes/lite/images/menubar/logout.png) 0 0px no-repeat;
+	cursor: pointer;
+}
+
+#right-navigation .menu-logout.hover {
+	background: url(source/themes/lite/images/menubar/logout.png) 0 -22px no-repeat;
+}
+
+#right-navigation .menu-userName {
+	padding: 0px 15px 0px 0px;
+	color: #37ADCA;
+	font-weight: bold;
+	float: right;
+}
+
+#right-navigation .menu-userAccount {
+	color: #000;
+	font-weight: normal;
+	font-size: smaller;
+	float: right;
+}
+
+/*default navigation*/
+.global-visible {
+	height: 37px;
+	padding-top: 10px;
+}
+
+#navigation ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+#navigation li {
+	display: block;
+	float: left;
+	border: 0;
+	padding: 0;
+}
+
+/*main navigation*/
+#main-navigation, #sub-navigation {
+	clear: both;
+}
+
+#main-navigation {
+	width: 700px;
+}
+
+#main-navigation .tail {
+	padding: 0;
+	width: 89px !important;
+}
+
+#main-navigation .tail img {
+	width: 89px !important;
+}
+
+#main-navigation .tail:first-child {
+	padding: 0;
+	width: 100px !important;
+}
+
+#main-navigation .tail:first-child img {
+	width: 100px !important;
+}
+
+#main-navigation div {
+	float: left;
+	border: 0;
+	padding: 0;
+	font-family: Arial;
+	font-size: 18px;
+	padding: 5px;
+	height: 21px;
+	background: url(../images/main_nav_bg.png) repeat-x;
+	text-align: center;
+}
+
+#main-navigation .tail {
+	padding: 0;
+}
+
+#main-navigation .main-nav-child-div {
+	clear: none;
+	float: left;
+	height: 30px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+/* Content views set the overall page wrapper element class to their view name.
+ * The declaration below sets main menu items to selected when each content view
+ * is displayed.
+ */
+.portal #main-navigation .main-nav-child-div #menu-portal,
+.market #main-navigation .main-nav-child-div #menu-market,
+.account #main-navigation .main-nav-child-div #menu-account {
+	border-left: 1px solid #BEC4C8;
+	border-right: 1px solid #BEC4C8;
+	background: url("images/active-menu-bg.png") repeat-x;
+	color: #37ADCA;
+	margin-top: -1px;
+}
+
+#main-navigation .main-right-tail {
+	background: url("../images/main_nav_right_tail.png") no-repeat;
+	background-position: right;
+	width: 60px;
+	padding: 0px;
+}
+
+#main-navigation .main-left-tail {
+	background: url("../images/main_nav_left_tail.png") no-repeat;
+	background-position: left;
+	width: 60px;
+	padding: 0px;
+}
+
+/*sub navigation*/
+
+#sub-navigation {
+/* background: url("images/sub-menu.png") no-repeat;*/
+	height: 32px;
+	width: 730px;
+	padding-top: 10px;
+}
+
+#sub-navigation li {
+	height: 20px;
+	padding-left: 22px;
+	padding-right: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	cursor: pointer;
+}
+
+/*news*/
+#sub-navigation .menu-news {
+	background: url(source/themes/lite/images/menubar/news.png) 0 0px no-repeat;
+}
+
+#sub-navigation .menu-news.hover {
+	background: url(source/themes/lite/images/menubar/news.png) 0 -22px no-repeat;
+}
+
+.news-visible #sub-navigation .menu-news {
+	background: url(source/themes/lite/images/menubar/news.png) 0 -44px no-repeat;
+}
+
+/*orders*/
+#sub-navigation .menu-orders {
+	background: url(source/themes/lite/images/menubar/orders_positions.png) 0 0px no-repeat;
+}
+
+#sub-navigation .menu-orders.hover {
+	background: url(source/themes/lite/images/menubar/orders_positions.png) 0 -22px no-repeat;
+}
+
+.orders-visible #sub-navigation .menu-orders {
+	background: url(source/themes/lite/images/menubar/orders_positions.png) 0 -44px no-repeat;
+}
+
+/*positons*/
+#sub-navigation .menu-positions {
+	background: url(source/themes/lite/images/menubar/orders_positions.png) 0 0px no-repeat;
+}
+
+#sub-navigation .menu-positions.hover {
+	background: url(source/themes/lite/images/menubar/orders_positions.png) 0 -22px no-repeat;
+}
+
+.positions-visible #sub-navigation .menu-positions {
+	background: url(source/themes/lite/images/menubar/orders_positions.png) 0 -44px no-repeat;
+}
+
+/*options*/
+#sub-navigation .menu-options {
+	background: url(source/themes/lite/images/menubar/options.png) 0 0px no-repeat;
+}
+
+#sub-navigation .menu-options.hover {
+	background: url(source/themes/lite/images/menubar/options.png) 0 -22px no-repeat;
+}
+
+.options-visible #sub-navigation .menu-options {
+	background: url(source/themes/lite/images/menubar/options.png) 0 -44px no-repeat;
+}
+
+/*spreads*/
+#sub-navigation .menu-spreads {
+	background: url(source/themes/lite/images/menubar/spread.png) 0 0px no-repeat;
+}
+
+#sub-navigation .menu-spreads.hover {
+	background: url(source/themes/lite/images/menubar/spread.png) 0 -22px no-repeat;
+}
+
+.spreads-visible #sub-navigation .menu-spreads {
+	background: url(source/themes/lite/images/menubar/spread.png) 0 -44px no-repeat;
+}
+
+/*time & sales*/
+#sub-navigation .menu-timeAndSales {
+	background: url(source/themes/lite/images/menubar/time_sales.png) 0 0px no-repeat;
+}
+
+#sub-navigation .menu-timeAndSales.hover {
+	background: url(source/themes/lite/images/menubar/time_sales.png) 0 -22px no-repeat;
+}
+
+.timeAndSales-visible #sub-navigation .menu-timeAndSales {
+	background: url(source/themes/lite/images/menubar/time_sales.png) 0 -44px no-repeat;
+}
+
+/*product finder*/
+#sub-navigation .menu-productFinder {
+	background: url(source/themes/lite/images/menubar/product_finder.png) 0 0px no-repeat;
+}
+
+#sub-navigation .menu-productFinder.hover {
+	background: url(source/themes/lite/images/menubar/product_finder.png) 0 -22px no-repeat;
+}
+
+.productFinder-visible #sub-navigation .menu-productFinder {
+	background: url(source/themes/lite/images/menubar/product_finder.png) 0 -44px no-repeat;
+}
+
+#sub-navigation .menu-notifications {
+	background: url(source/themes/lite/images/menubar/notifications.png) 0 0px no-repeat;
+}
+
+#sub-navigation .menu-notifications.hover {
+	background: url(source/themes/lite/images/menubar/notifications.png) 0 -22px no-repeat;
+}
+
+.activityBlotter-visible #sub-navigation .menu-notifications {
+	background: url(source/themes/lite/images/menubar/notifications.png) 0 -44px no-repeat;
+}
+
+#sub-navigation .menu-positions-disabled {
+	background: url(images/positions.png) no-repeat;
+	opacity: 0.4;
+	cursor: default;
+	width: 100px;
+}
+
+#sub-navigation .menu-orders-disabled {
+	background: url(images/orders.png) no-repeat;
+	opacity: 0.4;
+	cursor: default;
+	width: 90px;
+}
+
+#sub-navigation .menu-options-disabled {
+	background: url(images/options.png) no-repeat;
+	opacity: 0.4;
+	cursor: default;
+	width: 90px;
+}
+
+#sub-navigation .menu-activity-disabled {
+	background: url(images/activity.png) no-repeat;
+	opacity: 0.4;
+	cursor: default;
+	width: 100px;
+}
+
+/*sub navigation states*/
+.market-navigation, .portal-navigation, .account-navigation {
+	display: none;
+}
+
+.portal #header .portal-navigation {
+	display: block;
+}
+
+.market #header .market-navigation {
+	display: block;
+}
+
+.account #header .account-navigation {
+	display: block;
+}
+
+#heatmapContainer {
+	height: 100%;
+	background-color: #333;
+}

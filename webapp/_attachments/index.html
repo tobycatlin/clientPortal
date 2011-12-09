@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+	<META NAME="SKYPE_TOOLBAR" CONTENT="SKYPE_TOOLBAR_PARSER_COMPATIBLE"/>
+	<title>Caplin Client Portal</title>
+
+	<link rel="stylesheet" href="css/common-layout.css" type="text/css">
+	<link rel="stylesheet" href="css/navigation.css" type="text/css">
+	<link rel="stylesheet" href="css/footer.css" type="text/css">
+
+	<script src="vendor/couchapp/loader.js"></script>
+	<!--<script type="text/javascript" src="javascript/caplin/bootstrap/bootstrap.js"></script>-->
+
+	<script type="text/javascript">
+		var $db = $.couch.db("clientportal");
+
+		function getParameterByName(name) {
+			var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+			return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+		};
+
+		function renderSections(data){
+			var ul = $("<ul></ul>");
+			var i = 0;
+			for ( i = 0; i<data.length; i++){
+
+				var li = $("<li></li>");
+				li.text(data[i].sectionTitle);
+
+				//render content section. refactor out
+				if (data[i].sectionContent){
+					var sectionContent = $("<div class='section'></div>");
+					sectionContent.append($("<h2>"+data[i].sectionTitle+"</h2>"));
+					sectionContent.append(data[i].sectionContent);
+
+					//attach a click  handler to scroll to content
+					var sectionid = data[i].id;
+
+					if (sectionid){
+						sectionContent.attr("id", sectionid);
+						li.data('sectionid', sectionid);
+						li.click(function() {
+							var sid = $(this).data('sectionid');
+							var pos = $('#'+sid).position();
+//							$("#main-content").css("top", -pos.top);
+							
+							$("#main-content").animate({
+								top: -(pos.top - 25)
+								}, 1000);
+							});
+					}
+
+					$("#main-content").append(sectionContent);
+
+				}
+
+				//recurse through subsections
+				if (data[i].subSection){
+					li.append(renderSections(data[i].subSection));
+				}
+				ul.append(li);
+			}
+
+			return ul;
+
+		}
+		function refresh(docid) {
+
+			$db.openDoc(docid, {
+							success: function(data) {
+								$("#main-content").html("");
+								$("#side-nav-content").html("");
+								$("#main-content").animate({top: 25}, 200);
+								var navUL = renderSections(data.sections);
+								$("#side-nav-content").append(navUL);
+								$("#articleTitle").text(data.title);
+							},
+							error: function(status) {
+							console.log(status);
+						}
+			});
+
+//			$db.view("clientPortal/documents", {
+//				success: function(data) {
+//					for (i in data.rows) {
+//						console.log(data.rows[i].id)
+//						$("#side-nav-content").append(data.rows[i].key + "<br/>");
+//					}
+//				}
+//			});
+		};
+
+		//	var data = {
+		//	"category":"CaplinTrader",
+		//	"body":"Front end blah",
+		//	"title":"Caplin trader introduction"
+		//	};
+		//	var $db = $.couch.db("clientportal").saveDoc(
+		//	data,
+		//	{success: function() { alert("Saved ok."); }}
+		//	);
+
+		$(document).ready(function() {
+			var viewModel = {
+			searchterm: ko.observable(),
+			visibleViewsString : ko.observable(''),
+			toggleView: function(viewName) {
+				$db.view("clientPortal/categories?key=\""+viewName+"\"", {
+					success: function(data) {
+						var ddMenu = $("<div></div>");
+						var ul = $("<ul></ul>");
+						for (i in data.rows) {
+							var li = $("<li></li>");
+							li.click(function() {
+								refresh(data.rows[i].id)
+							});
+							li.text(data.rows[i].value.title);
+							ul.append(li);
+						}
+
+						$(ddMenu).append(ul);
+						$("#main-content").html("");
+						$("#side-nav-content").html(ddMenu);
+						$("#articleTitle").text(viewName);
+
+					}
+				});
+//				clientportal/_design/clientPortal/_view/categories?key="Caplin Trader"
+//					debugger;
+				},
+			showView: function(viewName) {
+					debugger;
+				},
+			doSearch: function() {
+				$db.view("/clientportal/_fti/_design/foo/by_subject?q=\""+this.searchterm+"\"", {
+					success: function(data) {
+						debugger;
+						var ddMenu = $("<div></div>");
+						var ul = $("<ul></ul>");
+						for (i in data.rows) {
+							var li = $("<li></li>");
+							li.click(function() {
+								refresh(data.rows[i].id)
+							});
+							li.text(data.rows[i].value.title);
+							ul.append(li);
+						}
+
+						$(ddMenu).append(ul);
+						$("#main-content").html("");
+						$("#side-nav-content").html(ddMenu);
+						$("#articleTitle").text(viewName);
+
+					}
+				});
+				}
+			};
+
+
+			// Activates knockout.js
+			ko.applyBindings(viewModel);
+			var docid = getParameterByName("id");
+			refresh(docid);
+
+			$("#loading").hide();
+			$("#portal").show();
+			$(".market-navigation").show();
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="wrapper">
+	<div data-bind="attr: {'class': visibleViewsString}">
+		<div id="header">
+			<div id="logo"></div>
+			<div id="navigation">
+
+				<div id="main-navigation">
+					<div class="tail"><img src="images/main_nav_left_tail.png" style="width:100px;height:31px;"/></div>
+					<div class="main-nav-child-div">
+						<div id="menu-portal" class="mainMenu hoverable"
+							 data-bind="click: function() {showView('portal')}">Licensing
+						</div>
+						<div id="menu-market" class="mainMenu hoverable"
+							 data-bind="click: function() {showView('market')}">Documentation
+						</div>
+						<div id="menu-account" class="mainMenu hoverable"
+							 data-bind="click: function() {showView('account')}">Support
+						</div>
+					</div>
+					<div class="tail"><img src="images/main_nav_right_tail.png" style="width:100px;height:31px;"/></div>
+				</div>
+
+				<div id="sub-navigation">
+					<ul class="portal-navigation">
+						<li class="menu-orders hoverable" data-bind="click: function() {toggleView('orders')}">Orders
+						</li>
+						<li class="menu-positions hoverable" data-bind="click: function() {toggleView('positions')}">
+							Positions
+						</li>
+						<li class="menu-notifications hoverable"
+							data-bind="click: function() {toggleView('activityBlotter')}">Notifications
+						</li>
+						<li class="menu-productFinder hoverable"
+							data-bind="click: function() {toggleView('productFinder')}">Product Finder
+						</li>
+					</ul>
+
+					<ul class="market-navigation">
+						<li class="hoverable" data-bind="click: function() {toggleView('Caplin Xaqua')}">Caplin Xaqua</li>
+						<li class="hoverable" data-bind="click: function() {toggleView('Caplin Trader')}">Caplin Trader</li>
+						<li class="hoverable" data-bind="click: function() {toggleView('DataSource')}">DataSource</li>
+						<li class="hoverable" data-bind="click: function() {toggleView('Liberator')}">Liberator</li>
+						<li class="hoverable" data-bind="click: function() {toggleView('StreamLink')}">StreamLink</li>
+						<li class="hoverable" data-bind="click: function() {toggleView('Transformer')}">Transformer</li>
+					</ul>
+
+					<ul class="account-navigation">
+						<li class="menu-orders hoverable" data-bind="click: function() {toggleView('orders')}">Orders
+						</li>
+						<li class="menu-positions hoverable" data-bind="click: function() {toggleView('positions')}">
+							Positions
+						</li>
+						<li class="menu-notifications hoverable"
+							data-bind="click: function() {toggleView('activityBlotter')}">Notifications
+						</li>
+						<li class="menu-productFinder hoverable"
+							data-bind="click: function() {toggleView('productFinder')}">Product Finder
+						</li>
+					</ul>
+
+
+				</div>
+
+			</div>
+
+			<div id="right-navigation">
+
+				<ul>
+					<li id="logout" class="menu-logout hoverable" data-bind="click: function() {logout()}">Logout</li>
+					<li class="menu-userName"></li>
+				</ul>
+
+			</div>
+		</div>
+		<!-- #header-->
+
+
+		<div id="dragOverflowControl">
+
+			<div class="content" id="portal">
+
+				<div class="column col1">
+				 	<div data-proportional-height="2" class="panel">
+							<div class="panelHeader">
+								<span class="text">Navigation</span>
+							</div>
+							<div class="panelContent" id="side-nav-content"></div>
+					</div>
+				</div>
+
+				<div class="column col2">
+
+					<div data-proportional-height="2" class="container panel">
+							<div class="panelHeader">
+								<span class="text">Article:</span><span id="articleTitle" class="text"></span>
+							</div>
+							<div class="panelContent" id="main-content"></div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="content" id="market">
+
+				<div class="column col1">
+
+				</div>
+
+				<div class="column col2">
+
+				</div>
+			</div>
+
+			<div class="content" id="accountContainer">
+
+			</div>
+
+			<div class="content" id="loading">
+
+			</div>
+
+			<div class="content" id="sliders">
+				<div class="slider" id="options">
+					<div class="columnPaddingSlider">
+						<div id="optionsContainer"></div>
+					</div>
+				</div>
+
+				<div class="slider" id="spreads">
+					<div class="columnPaddingSlider">
+						<div id="spreadsContainer" class="container"></div>
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+		<div id="footer">
+			<div id="status-bar">
+
+			<form data-bind="submit:doSearch">
+				<input type="text" data-bind='value:searchterm, valueUpdate: "afterkeydown"' />
+				<button type="submit"  data-bind="enable:true">Search</button>
+			</form>
+
+
+			</div>
+
+		</div>
+		<!-- #footer -->
+	</div>
+</div>
+<!-- #wrapper -->
+
+</body>
+
+</html>

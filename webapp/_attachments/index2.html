@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery Test</title>
+	<!-- <link rel="stylesheet" href="style/main.css" type="text/css"> -->
+	<script src="vendor/couchapp/loader.js"></script>
+	<script type="text/javascript">
+		var $db = $.couch.db("clientportal");
+
+		function refresh() {
+			$db.view("docs/docs", {
+				success: function(data) {
+					for (i in data.rows) {
+						$("body").append(data.rows[i].key);
+					}
+				}
+			});
+		}
+		;
+
+		$(document).ready(function() {
+
+
+			//var $db = $.couch.db("clientportal").saveDoc(
+			//{type: "address", name: "Wilma", mobile: "555-003"},
+			//{success: function() { alert("Saved ok."); }}
+			//);
+			//var docs = db.view("clientportal/docs");
+			refresh();
+		});
+	</script>
+</head>
+<body>
+
+</body>
+
+
+</html>

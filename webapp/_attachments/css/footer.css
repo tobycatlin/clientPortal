@@ -1,0 +1,65 @@
+/* Footer UI */
+.footer-parent {
+}
+
+.footer-parent div {
+	float: left;
+	clear: none;
+	padding: 0 20px 0 10px;
+}
+
+.label-type {
+	background: url(../images/layout/footer-divider.png) no-repeat;
+	font-family: arial;
+	font-size: 11px;
+	color: #ffffff;
+}
+
+.value-details {
+	font-weight: bold;
+}
+
+.status-div {
+	float: right;
+	color: #45545F;
+	line-height: 20px;
+}
+
+#account-summary {
+	margin-top: 5px;
+}
+
+#status-bar {
+	height: 20px;
+}
+
+#account-summary {
+	float: left;
+}
+
+#connectionStatusContainer {
+	float: right;
+}
+
+#status-bar #caplinStatusBar #connectionStatusText {
+	line-height: 16px;
+}
+
+#status-bar #caplinStatusBar #connectionStatusIndicator {
+	top: -3px;
+}
+
+#status-bar #caplinStatusBar {
+	bottom: 0;
+	float: right;
+	position: absolute;
+	right: 0;
+	height: 22px;
+}
+
+#status-bar #caplinStatusBar #connectionStatusText {
+	text-transform: none;
+	font-size: 12px !important;
+	font-weight: normal;
+	left: -5px;
+}

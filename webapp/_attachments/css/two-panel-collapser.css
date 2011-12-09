@@ -1,0 +1,45 @@
+/* This set of css classes is used to create a column of two panels that can
+ * be collapsed like an accordion but where more than one can be open
+ * at once, and the panel still has a fixed height with no scrolling.
+ *
+ * By default, this stylesheet expands top and bottom to 50% of the height each.
+ * To change this to different percentages, create a specific selector for your
+ * class with different % heights, e.g:
+ * #my-big-small-column.multi-collapser .top    {height: 70%}
+ * #my-big-small-column.multi-collapser .bottom {height: 30%}
+ *
+ * Or to use a set pixel height for the bottom panel you need to use
+ * set top and bottom values as well:
+ * #my-fixed-height-column.multi-collapser .top    {height: auto; bottom: 100px}
+ * #my-fixed-height-column.multi-collapser .bottom {height: 100px}
+ * 
+ * Also note the header heights are all hard coded to 26px. There is no real concept of css 
+ * variables so unfortunately you will need to either change or override all of these to
+ * change the app's general header heights.
+ */
+.multi-collapser {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.multi-collapser .collapser-element {
+	position: relative;
+	height: 50%;
+	left: 0;
+	right: 0;
+}
+
+.collapser-content {
+	position: absolute;
+	top: 26px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: auto !important;
+	width: auto !important;
+	background-color: #333333;
+}
+

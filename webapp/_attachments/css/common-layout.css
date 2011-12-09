@@ -1,0 +1,452 @@
+/* Global
+-----------------------------------------------------------------------------*/
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: -moz-none; /* Allows setting -moz-user-select:text on other elements */
+	-o-user-select: none;
+}
+
+input {
+	-moz-user-select: text;
+	-webkit-user-select: text;
+	-khtml-user-select: text;
+	-o-user-select: text;
+}
+
+body {
+	font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
+	overflow: auto;
+	height: 100%;
+}
+
+a {
+	color: blue;
+	outline: none;
+	text-decoration: underline;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+img {
+	border: none;
+}
+
+input {
+	vertical-align: middle;
+}
+
+/* App
+-----------------------------------------------------------------------------*/
+
+#wrapper {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	min-width: 1000px;
+	min-height: 588px;
+	/*background: url(../images/tiled_carbon.jpg);*/
+	background-color:#fff;
+}
+
+#header {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 66px;
+	background: url(../images/main-header-bg.png) repeat-x !important;
+	border-bottom: 1px solid #fff;
+	z-index: 1;
+}
+
+.content {
+	position: absolute;
+	top: 66px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+#footer {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 29px;
+	margin-top: 10px;
+}
+
+#dragOverflowControl {
+	position: absolute;
+	width: 100%;
+	top: 0px;
+	bottom: 29px;
+	overflow: hidden;
+}
+
+/* Navigation
+-----------------------------------------------------------------------------*/
+
+body div#flasher {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+
+	background-color: white;
+	background-image: none;
+	width: 100%;
+	height: 100%;
+
+	opacity: 1;
+
+	transition-duration: 0.5s, 0.5s;
+	transition-property: opacity;
+
+	-moz-transition-duration: 0.5s, 0.5s;
+	-moz-transition-property: opacity;
+
+	-webkit-transition-duration: 0.5s, 0.5s;
+	-webkit-transition-property: opacity;
+
+	-ms-transition-duration: 0.5s, 0.5s;
+	-ms-transition-property: opacity;
+}
+
+#flasher.flash {
+	opacity: 0;
+	display: block;
+}
+
+/* Classes
+-----------------------------------------------------------------------------*/
+.column {
+	position: relative;
+	float: left;
+	width: 33%;
+	height: 100%;
+}
+
+.col1 {
+	width: 25%;
+}
+
+.col2 {
+	width: 75%;
+}
+
+.col3 {
+	width: 0%;
+}
+
+.columnPadding {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 7px;
+	right: 0px;
+
+}
+.panel{
+	background-color: #fff;
+	
+}
+#market .col2 .columnPadding,
+#portal .col3 .columnPadding {
+	right: 7px;
+}
+
+#portal .col1 {
+
+	
+}
+
+.columnPaddingSlider {
+	position: absolute;
+	top: 2px;
+	bottom: 0;
+	left: 9px;
+	right: 0px;
+}
+
+.container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+/* Panel style
+-----------------------------------------------------------------------------*/
+.panelHeader {
+	height: 24px;
+	position: relative;
+	padding-left: 5px;
+	padding-top: 2px;
+	font-size: 17px;
+	color: white;
+	background: black url('../images/column-header-bg.png') repeat-x;
+	z-index:100000;
+}
+
+.panelHeader.collapsible {
+	cursor: pointer;
+}
+
+.panelHeaderArrow {
+	float: left;
+	width: 12px;
+	height: 12px;
+	background: url('../images/column-header-arrow.png') no-repeat;
+	border-right: 0px solid #000;
+	cursor: pointer;
+	margin: 3px 5px 0 0;
+	transition-duration: 0.5s, 0.3s;
+	transition-property: transform;
+
+	-moz-transition-duration: 0.5s, 0.3s;
+	-moz-transition-property: -moz-transform;
+
+	-webkit-transition-duration: 0.5s, 0.3s;
+	-webkit-transition-property: -webkit-transform;
+
+	-ms-transition-duration: 0.5s, 0.3s;
+	-ms-transition-property: -ms-transform;
+}
+
+.collapsed .panelHeaderArrow {
+	transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+}
+
+.panelContent {
+	position: absolute;
+	top: 25px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	background-color: #fff; /*height: 100%;*/
+}
+
+.panel.collapsed {
+	height: 26px !important;
+}
+
+.panel.collapsed .panelContent {
+	display: none;
+}
+
+/* Content screen switching
+-----------------------------------------------------------------------------*/
+
+.content {
+	display: none;
+}
+
+.portal #portal {
+	display: block;
+}
+
+.market #market {
+	display: block;
+}
+
+/* market has 2 cols so make col double width */
+#market .col1 {
+	width: 66%;
+}
+
+/* market has 2 cols so make col double width */
+#market .col2 {
+	width: 34%;
+}
+
+#loading {
+	display: block;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	z-index: 2201;
+	text-align: center;
+}
+
+.loadingContent {
+	width: 964px;
+	margin: 8px auto; /*background: url('public/images/mfg_platform_login_header.jpg') no-repeat top left;*/
+	padding-top: 100px;
+	text-align: left;
+}
+
+#loadingMessage, #loadingLog {
+	position: relative;
+	width: 100%;
+	margin-bottom: 15px;
+	padding: 15px;
+	font-size: 24px;
+	text-align: center;
+	color: #666;
+	margin-bottom: 44px;
+	background: url('../images/spinner.png') no-repeat center center;
+	height: 108px;
+	margin-top: 80px;
+}
+
+#loading  .footer {
+	padding: 60px 30px 10px 30px;
+	color: #555;
+	font-size: 9px;
+	line-height: 11px;
+	clear: both;
+}
+
+#loadingLog {
+	display: none;
+}
+
+.loadingError #loadingLog {
+	display: none;
+}
+
+/* Portal layout
+-----------------------------------------------------------------------------*/
+
+/* Media panel expanded */
+.portal .col1,
+.portal .col2 {
+	display: block;
+	height: 100%;
+}
+
+/*.portal .column > div {*/
+/*}*/
+
+/*.portal .col3 > div {*/
+/*position: relative;*/
+/*}*/
+
+/* Sliders
+-----------------------------------------------------------------------------*/
+#sliders.content {
+	display: block;
+	z-index: 100;
+	position: absolute;
+	top: 163px;
+	left: -100%;
+	right: 100%;
+	bottom: 0px;
+	margin-right: 2px;
+	min-width: 600px;
+}
+
+.slider {
+	transition-duration: 0.5s, 0.3s;
+	transition-property: left;
+
+	-moz-transition-duration: 0.5s, 0.3s;
+	-moz-transition-property: left;
+
+	-webkit-transition-duration: 0.5s, 0.3s;
+	-webkit-transition-property: left;
+
+	-ms-transition-duration: 0.5s, 0.3s;
+	-ms-transition-property: left;
+
+	position: absolute;
+	height: 100%;
+	width: 66.3%;
+	left: 0;
+	overflow: auto;
+
+	box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.7);
+	-moz-box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.7);
+	-webkit-box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.7);
+	-ms-box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.7);
+}
+
+#sliders > div.half {
+	width: 33%;
+}
+
+#sliders.content div.enabled {
+	left: 100%;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+#sliders .sliderClose {
+	position: absolute;
+	top: 6px;
+	right: 5px;
+	width: 12px;
+	height: 12px;
+	background-image: url("../images/slider-close.png");
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+.visible {
+	visibility: visible;
+}
+
+/* Deck fixes
+-----------------------------------------------------------------------------*/
+.deckComponent .x-panel-body {
+	background-color: white;
+}
+
+.deckComponent .backFace {
+	background-color: white;
+}
+
+#ordersContainer {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.positionsComponent .panelContent {
+}
+
+#portalNewsContainer .scrollbar-vertical {
+	top: 0px !important;
+}
+
+/* Globally applicable decorations:
+-----------------------------------------------------------------------------*/
+button.submit, input.submit {
+	color: yellow !important;
+}
+
+#sliders > #activityBlotter {
+	width: 33.2% !important;
+	border-right: 0px solid #000 !important;
+}
+
+#productFinder.half {
+	border-right: 2px solid #333 !important;
+	margin-top: 2px !important;
+}
+
+#productFinder.slider {
+	margin-top: 0px;
+
+}
+
+#productFinder .columnPaddingSlider {
+	top: 0px !important;
+
+}
+
+.sectionTitle{
+	display:none;
+}
